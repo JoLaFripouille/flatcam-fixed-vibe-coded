@@ -4,11 +4,38 @@ This repository is a personal fork of FlatCAM / FlatCAM Evo with practical PCB
 milling fixes. See [FORK_NOTES.md](FORK_NOTES.md) for the fork notes, upstream
 attribution, license reminder, and the current list of changes.
 
+## What this fork fixes
+
+This fork currently focuses on practical CNC/PCB workflow fixes tested on real
+KiCad and FlatCAM jobs.
+
+### KiCad Edge.Cuts internal cutouts
+
+FlatCAM's Cutout tool could generate the toolpath on the wrong side of internal
+openings when the outside board profile and inner cutouts came from the same
+KiCad `Edge.Cuts` Gerber. In the example below, the triangular internal cutouts
+were not handled as expected.
+
+![Wrong side internal cutouts](docs/screenshots/2026-05-14-cutout-fix/v0-before-wrong-side-internal-cutouts.png)
+
+The fix changes the contour selection logic so the largest contour is treated as
+the outside board profile, while smaller closed contours are treated as internal
+openings.
+
+During development, one intermediate version recovered the inner contours but
+cut both sides of the same shapes. This regression is documented too, so the
+change history stays visible and reproducible.
+
+![Double sided cut regression](docs/screenshots/2026-05-14-cutout-fix/v1-regression-double-sided-cut.png)
+
+More dated screenshots and notes are tracked in
+[`docs/CHANGELOG_VISUAL.md`](docs/CHANGELOG_VISUAL.md).
+
 ## Windows quick setup
 
 For normal users, download and run:
 
-`FlatCAM-Fixed-Setup.exe`
+[`FlatCAM-Fixed-Setup.exe`](https://github.com/JoLaFripouille/flatcam-fixed-vibe-coded/releases/download/v0.1.0/FlatCAM-Fixed-Setup.exe)
 
 It installs FlatCAM Fixed with its own portable Python runtime, so users should
 not need to install Python or run PowerShell commands.

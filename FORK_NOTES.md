@@ -34,6 +34,8 @@ The current fix chooses one cutout ring per detected contour:
 
 This was tested with a KiCad board containing triangular internal cutouts.
 
+Visual evidence is tracked in [`docs/CHANGELOG_VISUAL.md`](docs/CHANGELOG_VISUAL.md).
+
 ## Notes
 
 This fork is not an official FlatCAM release. It is a workshop-tested branch

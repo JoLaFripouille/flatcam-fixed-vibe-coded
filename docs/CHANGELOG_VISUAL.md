@@ -28,9 +28,7 @@ The final implementation chooses one cutout ring per detected contour:
 - largest contour: outside board profile
 - smaller contours: internal openings
 
-Add a final screenshot here when a clean result is captured:
-
-`screenshots/2026-05-14-cutout-fix/v2-fixed-single-sided-internal-cutouts.png`
+![Fixed internal cutouts result](screenshots/2026-05-14-cutout-fix/v2-fixed-single-sided-internal-cutouts.png)
 
 ## Screenshot naming convention
 

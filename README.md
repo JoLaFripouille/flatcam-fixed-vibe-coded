@@ -28,6 +28,11 @@ change history stays visible and reproducible.
 
 ![Double sided cut regression](docs/screenshots/2026-05-14-cutout-fix/v1-regression-double-sided-cut.png)
 
+Final result: the internal triangular openings are cut on the correct side,
+while the outside board contour keeps the outside cut.
+
+![Fixed internal cutouts result](docs/screenshots/2026-05-14-cutout-fix/v2-fixed-single-sided-internal-cutouts.png)
+
 More dated screenshots and notes are tracked in
 [`docs/CHANGELOG_VISUAL.md`](docs/CHANGELOG_VISUAL.md).
 

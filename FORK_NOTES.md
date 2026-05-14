@@ -41,4 +41,4 @@ Visual evidence is tracked in [`docs/CHANGELOG_VISUAL.md`](docs/CHANGELOG_VISUAL
 This fork is not an official FlatCAM release. It is a workshop-tested branch
 published so the changes are visible, reproducible, and reusable.
 
-Windows setup helper: [`scripts/windows/Setup-FlatCAM.ps1`](scripts/windows/Setup-FlatCAM.ps1).
+Windows setup helper: [`SETUP_WINDOWS.ps1`](SETUP_WINDOWS.ps1).

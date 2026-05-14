@@ -4,8 +4,18 @@ This repository is a personal fork of FlatCAM / FlatCAM Evo with practical PCB
 milling fixes. See [FORK_NOTES.md](FORK_NOTES.md) for the fork notes, upstream
 attribution, license reminder, and the current list of changes.
 
-Windows users can use the setup helper in
-[`scripts/windows`](scripts/windows/README.md).
+## Windows quick setup
+
+Run this from the repository folder:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\SETUP_WINDOWS.ps1 -CreateDesktopShortcut
+```
+
+The easy setup file is at the repository root:
+[`SETUP_WINDOWS.ps1`](SETUP_WINDOWS.ps1)
+
+More details: [`scripts/windows`](scripts/windows/README.md).
 
 ---
 

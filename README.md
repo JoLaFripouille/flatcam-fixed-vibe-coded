@@ -40,7 +40,7 @@ More dated screenshots and notes are tracked in
 
 For normal users, download and run:
 
-[`FlatCAM-Fixed-Setup.exe`](https://github.com/JoLaFripouille/flatcam-fixed-vibe-coded/releases/download/v0.1.0/FlatCAM-Fixed-Setup.exe)
+[`FlatCAM-Fixed-Setup.exe`](https://github.com/JoLaFripouille/flatcam-fixed-vibe-coded/releases/download/v0.1.1/FlatCAM-Fixed-Setup.exe)
 
 It installs FlatCAM Fixed with its own portable Python runtime, so users should
 not need to install Python or run PowerShell commands.

@@ -1,6 +1,6 @@
 #define MyAppName "FlatCAM Fixed Vibe Coded"
 #define MyAppShortName "FlatCAM Fixed"
-#define MyAppVersion "0.1.0"
+#define MyAppVersion "0.1.1"
 #define MyAppPublisher "JoLaFripouille"
 #define MyAppURL "https://github.com/JoLaFripouille/flatcam-fixed-vibe-coded"
 #define SourceRoot ".."

@@ -1714,6 +1714,50 @@ class CutOut(AppTool):
 
         self.app.should_we_save = True
 
+    def cutout_rings_from_buffered_geo(self, geometry):
+        """
+        Return one cutout ring per detected Edge.Cuts contour.
+
+        KiCad Edge.Cuts can contain an exterior profile plus internal cutouts.
+        Gerber strokes import as thin polygon "tubes", so using both the
+        exterior and interior ring of every tube cuts both sides. Use the
+        largest contour exterior for the board outside and the smaller contour
+        interiors for holes/openings.
+        """
+        polygons = []
+
+        def collect(geo):
+            if geo is None or geo.is_empty:
+                return
+
+            if isinstance(geo, Polygon):
+                polygons.append(geo)
+                return
+
+            if isinstance(geo, (LineString, LinearRing)):
+                polygons.append(Polygon(geo))
+                return
+
+            if hasattr(geo, 'geoms'):
+                for sub_geo in geo.geoms:
+                    collect(sub_geo)
+
+        collect(geometry)
+        if not polygons:
+            return []
+
+        polygons = sorted(polygons, key=lambda poly: poly.area, reverse=True)
+        rings = []
+        for idx, poly in enumerate(polygons):
+            if idx == 0:
+                rings.append(poly.exterior)
+            elif poly.interiors:
+                rings.extend(list(poly.interiors))
+            else:
+                rings.append(poly.exterior)
+
+        return unary_union(rings) if rings else []
+
     def on_manual_geo(self):
         name = self.ui.obj_combo.currentText()
 
@@ -1758,11 +1802,11 @@ class CutOut(AppTool):
                         (isinstance(geo_union, list) and len(geo_union) == 1) or \
                         (isinstance(geo_union, MultiPolygon) and len(geo_union.geoms) == 1):
 
+                    buffered_geo = geo_union.buffer(margin + abs(dia / 2))
                     if dia >= 0:
-                        buff_geo = geo_union.buffer(margin + abs(dia / 2)).exterior
+                        buff_geo = self.cutout_rings_from_buffered_geo(buffered_geo)
                     else:
-                        buff_geo = geo_union.buffer(margin + abs(dia / 2)).interiors
-                        buff_geo = unary_union(buff_geo)
+                        buff_geo = unary_union(buffered_geo.interiors)
                     if shape_type is False:
                         geo_obj.solid_geometry = buff_geo
                     else:
@@ -1771,7 +1815,7 @@ class CutOut(AppTool):
 
                     if shape_type is False:
                         buff_geo = geo_union.buffer(margin + abs(dia / 2))
-                        geo_obj.solid_geometry = buff_geo
+                        geo_obj.solid_geometry = self.cutout_rings_from_buffered_geo(buff_geo)
                     else:
                         x0, y0, x1, y1 = geo_union.bounds
                         geo = box(x0, y0, x1, y1)
@@ -1786,12 +1830,9 @@ class CutOut(AppTool):
                 geo = geo.buffer(margin + abs(dia / 2))
                 if shape_type is False:
                     if isinstance(geo, Polygon):
-                        geo_obj.solid_geometry = geo.exterior
+                        geo_obj.solid_geometry = self.cutout_rings_from_buffered_geo(geo)
                     elif isinstance(geo, MultiPolygon):
-                        solid_geo = []
-                        for poly in geo:
-                            solid_geo.append(poly.exterior)
-                        geo_obj.solid_geometry = deepcopy(solid_geo)
+                        geo_obj.solid_geometry = self.cutout_rings_from_buffered_geo(geo)
                 else:
                     if isinstance(geo, Polygon):
                         geo_obj.solid_geometry = geo.envelope.exterior

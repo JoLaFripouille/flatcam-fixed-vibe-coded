@@ -4,6 +4,9 @@ This repository is a personal fork of FlatCAM / FlatCAM Evo with practical PCB
 milling fixes. See [FORK_NOTES.md](FORK_NOTES.md) for the fork notes, upstream
 attribution, license reminder, and the current list of changes.
 
+Windows users can use the setup helper in
+[`scripts/windows`](scripts/windows/README.md).
+
 ---
 
 FlatCAM Evo (c) 2019 - by Marius Stanciu

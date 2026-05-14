@@ -4,6 +4,9 @@ tests/tmp/
 build/
 /venv/
 /venv/
+/.venv/
+/FlatCAM-Fixed.cmd
+/requirements-windows-generated.txt
 
 # General for macOS
 .DS_Store

@@ -6,7 +6,22 @@ attribution, license reminder, and the current list of changes.
 
 ## Windows quick setup
 
-Run this from the repository folder:
+For normal users, download and run:
+
+`FlatCAM-Fixed-Setup.exe`
+
+It installs FlatCAM Fixed with its own portable Python runtime, so users should
+not need to install Python or run PowerShell commands.
+
+Developers can build the installer from the repository with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\BUILD_SETUP_EXE.ps1
+```
+
+The installer source is in [`installer/FlatCAM-Fixed.iss`](installer/FlatCAM-Fixed.iss).
+
+For a source-tree install without building an `.exe`, run:
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\SETUP_WINDOWS.ps1 -CreateDesktopShortcut

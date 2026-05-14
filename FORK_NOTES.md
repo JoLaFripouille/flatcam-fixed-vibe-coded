@@ -42,3 +42,6 @@ This fork is not an official FlatCAM release. It is a workshop-tested branch
 published so the changes are visible, reproducible, and reusable.
 
 Windows setup helper: [`SETUP_WINDOWS.ps1`](SETUP_WINDOWS.ps1).
+Windows installer build helper: [`BUILD_SETUP_EXE.ps1`](BUILD_SETUP_EXE.ps1).
+The generated `FlatCAM-Fixed-Setup.exe` includes a portable Python runtime for
+regular Windows users.
